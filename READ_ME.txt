@@ -4,7 +4,7 @@ Contact: dcrites5@wgu.edu
 IDE Version: IntelliJ IDEA 2021.2.3(Community Edition)
 JDK Version: JDK 17.0.1
 Scene Builder Version: 17.0.0
-MySQL Connector Driver Version: mysql-connector-java-8.0.27
+MySQL Connector Driver Version: mysql-connector-java-8.0.25
 Application Version: 1.0.1
 Date: 07/06/2022
 
