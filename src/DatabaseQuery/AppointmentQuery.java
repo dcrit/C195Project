@@ -109,7 +109,18 @@ public class AppointmentQuery {
             ps.setInt(11, customerId);
             ps.setInt(12,userId);
             ps.setInt(13, contactId);
-            ps.execute();
+            int insertSuccessful = ps.executeUpdate();
+
+            if(insertSuccessful > 0) {
+                Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Appointment Saved");
+                alert.setContentText("Appointment saved successfully");
+                alert.showAndWait();
+            }
+            if(insertSuccessful == 0){
+                Alert alert = new Alert(Alert.AlertType.ERROR, "Appointment Not Saved");
+                alert.setContentText("Error: Appointment not saved");
+                alert.showAndWait();
+            }
             DatabaseConnection.closeConnection();
         }catch (Exception e){
             e.printStackTrace();
@@ -158,7 +169,18 @@ public class AppointmentQuery {
             ps.setInt(11, customerId);
             ps.setInt(12,userId);
             ps.setInt(13, contactId);
-            ps.executeUpdate();
+            int insertSuccessful = ps.executeUpdate();
+
+            if(insertSuccessful > 0) {
+                Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Appointment Updated");
+                alert.setContentText("Appointment updated successfully");
+                alert.showAndWait();
+            }
+            if(insertSuccessful == 0){
+                Alert alert = new Alert(Alert.AlertType.ERROR, "Appointment not saved");
+                alert.setContentText("Error: Appointment not updated");
+                alert.showAndWait();
+            }
             DatabaseConnection.closeConnection();
         }catch (Exception e){
             e.printStackTrace();
@@ -349,12 +371,23 @@ public class AppointmentQuery {
      */
     public static LocalDateTime timeCovertForLocalDateTimeCurrentZone(LocalDateTime localDateTime){
 
-        ZoneId zoneOfUTC = ZoneId.of("UTC");
+      /*  ZoneId zoneOfUTC = ZoneId.of("UTC");
         ZoneId zone = ZoneId.systemDefault();
         ZonedDateTime zdt = localDateTime.atZone(zoneOfUTC);
         ZonedDateTime convertedZDT = zdt.withZoneSameInstant(ZoneId.of(String.valueOf(zone)));
 
         return convertedZDT.toLocalDateTime();
+        */
+       /* System.out.println("UTC Time " + localDateTime);
+        String input = localDateTime.toString();
+        LocalDateTime ldt = LocalDateTime.parse(input);
+        OffsetDateTime odt = ldt.atOffset(ZoneOffset.UTC);
+        ZoneId z = ZoneId.systemDefault();
+        ZonedDateTime  zdt = odt.atZoneSameInstant(z);*/
+       // System.out.println("System Default Time " + zdt.toLocalDateTime());
+        ZonedDateTime utcStartConvert = localDateTime.atZone(ZoneId.systemDefault());
+        return utcStartConvert.toLocalDateTime();
+
     }
 
         public static LocalDateTime convertToUTC(LocalDateTime utcString) throws ParseException {

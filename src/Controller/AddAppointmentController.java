@@ -18,7 +18,6 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.*;
-import java.util.Arrays;
 import java.util.Objects;
 import java.util.ResourceBundle;
 import java.util.function.Function;
@@ -109,7 +108,6 @@ public class AddAppointmentController implements Initializable {
     @FXML
     public  void save(ActionEvent actionEvent) throws Exception {
 
-        System.out.println(startTimeAMPMComboBox.getSelectionModel().getSelectedItem());
 
         //Lambda Expression function that makes it easier to parse combo boxes
         Function<Integer, Integer> convertComboBoxesToInteger = Integer::valueOf;
@@ -145,18 +143,21 @@ public class AddAppointmentController implements Initializable {
                 paddingTimesForDBEntry(String.valueOf(endTimeMinComboBoxFXID.getValue())) +
                         " " + endTimeAMPMComboBox.getValue();
 
-        System.out.println("sdf " + startDayAndTime);
 
         //Converting scheduled start and end times to UTC and LocalDateTime
         LocalDateTime start = convertToUTC(startDayAndTime);
+        System.out.println("Start UTC Time " + start);
         LocalDateTime end = convertToUTC(endDayAndTime);
 
         //Getting current time for create date and setting to UTC
         LocalDateTime createDate = LocalDateTime.now(ZoneOffset.UTC);
 
 
+
         //Checks for overlapping times and within business hours, then inserts appointment
-        if(!AppointmentException.checkForESTWorkHours(start, end) && !AppointmentException.checkForOverlappingTimes(start, end)) {
+        if(!AppointmentException.checkForESTWorkHours(start, end) &&
+                !AppointmentException.checkForOverlappingTimes(start, end) &&
+                !AppointmentException.checkingEndTimeIsNotBeforeStartTime(start, end)) {
             //Inserting Appointment
             DatabaseQuery.AppointmentQuery.createNewAppointment(title, description, location, type, start, end,
                     createDate, createdBy, lastUpdate, lastUpdatedBy, customerId, contactId, userId);

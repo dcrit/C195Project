@@ -80,6 +80,8 @@ public class EditCustomerController implements Initializable {
         }
 
         setCountryComboBox();
+        setDivisionComboBoxOnInit(country);
+
 
         divisionComboBoxSelector.setValue(division);
         countryComboBoxSelector.setValue(country);
@@ -230,6 +232,24 @@ public class EditCustomerController implements Initializable {
 
         divisionComboBoxSelector.setItems(divisionList);
 
+
+    }
+
+    /**
+     * Set the division combo box on init
+     * @param country Takes in the current country string
+     */
+    public void setDivisionComboBoxOnInit(String country){
+
+        ObservableList<String> divisionList = FXCollections.observableArrayList();
+        ObservableList<FirstLevelDivision> firstLevelDivisions = FirstLevelDivisionQuery.getDivision(country);
+
+        for (FirstLevelDivision fld: firstLevelDivisions){
+
+            divisionList.add(fld.getDivision());
+        }
+
+        divisionComboBoxSelector.setItems(divisionList);
 
     }
 

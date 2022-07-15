@@ -264,8 +264,8 @@ public class MainFormController implements Initializable {
 
         MainFormException.nullValueForDeleteCustomer(deleteCustomer);
 
-        if(deleteCustomer != null && !MainFormException.checkIfCustomerHasAnAppointment(deleteCustomer.getCustomerID())) {
-
+        if(deleteCustomer != null ) {
+            MainFormException.checkIfCustomerHasAnAppointment(deleteCustomer.getCustomerID());
             DatabaseQuery.CustomerQuery.deleteCustomer(deleteCustomer);
 
             Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/View/MainForm.fxml")));

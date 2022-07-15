@@ -4,12 +4,15 @@ import DatabaseConnection.DatabaseConnection;
 import Model.Customer;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
+import java.util.Optional;
 
 /**Customer Query*/
 public abstract class CustomerQuery {
@@ -123,7 +126,17 @@ public abstract class CustomerQuery {
             ps.setTimestamp(7, Timestamp.valueOf(lastUpdate));
             ps.setString(8, lastUpdatedBy);
             ps.setInt(9, divisionID);
-            ps.executeUpdate();
+            int insertSuccessful = ps.executeUpdate();
+            if(insertSuccessful > 0) {
+                Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Customer Saved");
+                alert.setContentText("Customer saved successful");
+                alert.showAndWait();
+            }
+            if(insertSuccessful == 0){
+                Alert alert = new Alert(Alert.AlertType.ERROR, "Customer Not Saved");
+                alert.setContentText("Error: Customer not saved");
+                alert.showAndWait();
+            }
             DatabaseConnection.closeConnection();
         }catch (Exception e){
             e.printStackTrace();
@@ -159,7 +172,19 @@ public abstract class CustomerQuery {
             ps.setTimestamp(5, Timestamp.valueOf(lastUpdate));
             ps.setString(6, lastUpdatedBy);
             ps.setInt(7, divisionId);
-            ps.executeUpdate();
+            int insertSuccessful = ps.executeUpdate();
+            if(insertSuccessful > 0) {
+                Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Customer Updated");
+                alert.setContentText("Customer updated successfully");
+                alert.showAndWait();
+            }
+            if(insertSuccessful == 0){
+                Alert alert = new Alert(Alert.AlertType.ERROR, "Customer Not Updated");
+                alert.setContentText("Error: Customer not updated");
+                alert.showAndWait();
+            }
+
+
             DatabaseConnection.closeConnection();
 
         } catch (Exception e) {
@@ -176,12 +201,16 @@ public abstract class CustomerQuery {
      */
     public static void deleteCustomer(Customer deleteCustomer) throws Exception {
 
-
-        String deleteQuery = "DELETE FROM customers WHERE Customer_ID =  " + deleteCustomer.getCustomerID();
-        DatabaseConnection.getConnection();
-        PreparedStatement ps = DatabaseConnection.connection.prepareStatement(deleteQuery);
-        ps.executeUpdate();
-        DatabaseConnection.closeConnection();
+        Alert alert = new Alert(Alert.AlertType.WARNING, "Delete Customer");
+        alert.setContentText("Are you sure you want to delete " + deleteCustomer.getCustomerName());
+        Optional<ButtonType> ok = alert.showAndWait();
+        if(ok.isPresent() && ok.get() == ButtonType.OK) {
+            String deleteQuery = "DELETE FROM customers WHERE Customer_ID =  " + deleteCustomer.getCustomerID();
+            DatabaseConnection.getConnection();
+            PreparedStatement ps = DatabaseConnection.connection.prepareStatement(deleteQuery);
+            ps.executeUpdate();
+            DatabaseConnection.closeConnection();
+        }
 
     }
 

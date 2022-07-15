@@ -165,11 +165,11 @@ public class EditAppointmentController implements Initializable {
         //Getting current time for create date and setting to UTC
         LocalDateTime createDate = LocalDateTime.now(ZoneOffset.UTC);
 
-
         //Checking if overlapping and inside work hours, then inserting.
         if(!AppointmentException.checkForOverLappingTimesForEditedAppointment(start, end,
                 passingAppointmentFromMain.getAppointmentId()) &&
-                !AppointmentException.checkForESTWorkHours(start, end)) {
+                !AppointmentException.checkForESTWorkHours(start, end) &&
+                !AppointmentException.checkingEndTimeIsNotBeforeStartTime(start, end)) {
             //Updating Appointment
             AppointmentQuery.editAppointment(title, description, location, type, start, end, createDate, createdBy,
                     lastUpdate, lastUpdatedBy, customerId, userId, contactId,

@@ -28,7 +28,7 @@ public abstract class DatabaseConnection {
 
             Class.forName(driver);
             connection = DriverManager.getConnection(jbdURL, userName, password);
-            System.out.println("Connection Successful!");
+            //System.out.println("Connection Successful!");
 
         }catch (Exception e){
             System.out.println("Error: " + e.getMessage());
@@ -44,7 +44,7 @@ public abstract class DatabaseConnection {
         try{
 
           connection.close();
-            System.out.println("Connection Closed!");
+            //System.out.println("Connection Closed!");
         }catch (Exception e){
             System.out.println("Error: " + e.getMessage());
         }

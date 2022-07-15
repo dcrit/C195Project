@@ -9,6 +9,7 @@ import javafx.scene.control.TextField;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Timestamp;
+import java.time.Duration;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.ZoneId;
@@ -303,4 +304,23 @@ public class AppointmentException {
     }
 
 
+    public static boolean checkingEndTimeIsNotBeforeStartTime(LocalDateTime start, LocalDateTime end){
+
+        int checkValue = start.compareTo(end);
+
+        if(checkValue == 1){
+            Alert alert = new Alert(Alert.AlertType.ERROR, "Invalid Scheduled Time");
+            alert.setContentText("Error: Scheduled end time can not be before start time");
+            alert.showAndWait();
+            return true;
+        }
+        if(checkValue == 0){
+            Alert alert = new Alert(Alert.AlertType.ERROR, "Invalid Scheduled Time");
+            alert.setContentText("Error: Scheduled start time and end time can not be equal");
+            alert.showAndWait();
+            return true;
+        }
+
+        return false;
+    }
 }
