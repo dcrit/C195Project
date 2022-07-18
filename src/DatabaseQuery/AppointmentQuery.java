@@ -330,8 +330,7 @@ public class AppointmentQuery {
 
         String ldtString = ldt.format(formatter);
 
-        int id = 0;
-        LocalDateTime start = null;
+        int id = 0;  LocalDateTime start = null;
         LocalDateTime end = null;
 
         try{
