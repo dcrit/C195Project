@@ -325,6 +325,7 @@ public class AppointmentQuery {
 
         LocalDateTime ldt = LocalDateTime.now();
         ldt = convertToUTC(ldt);
+        System.out.println("LDT " + ldt);
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 
         String ldtString = ldt.format(formatter);
@@ -345,8 +346,11 @@ public class AppointmentQuery {
 
             while (rs.next()){
                 id = rs.getInt("Appointment_ID");
+                System.out.println("ID " + id);
                 start = rs.getTimestamp("Start").toLocalDateTime();
+                System.out.println("Start " + start);
                 end = rs.getTimestamp("End").toLocalDateTime();
+                System.out.println("End " + end);
             }
 
             if(id != 0 ) {
@@ -371,13 +375,13 @@ public class AppointmentQuery {
      */
     public static LocalDateTime timeCovertForLocalDateTimeCurrentZone(LocalDateTime localDateTime){
 
-      /*  ZoneId zoneOfUTC = ZoneId.of("UTC");
+        ZoneId zoneOfUTC = ZoneId.of("UTC");
         ZoneId zone = ZoneId.systemDefault();
         ZonedDateTime zdt = localDateTime.atZone(zoneOfUTC);
         ZonedDateTime convertedZDT = zdt.withZoneSameInstant(ZoneId.of(String.valueOf(zone)));
 
         return convertedZDT.toLocalDateTime();
-        */
+
        /* System.out.println("UTC Time " + localDateTime);
         String input = localDateTime.toString();
         LocalDateTime ldt = LocalDateTime.parse(input);
@@ -385,8 +389,8 @@ public class AppointmentQuery {
         ZoneId z = ZoneId.systemDefault();
         ZonedDateTime  zdt = odt.atZoneSameInstant(z);*/
        // System.out.println("System Default Time " + zdt.toLocalDateTime());
-        ZonedDateTime utcStartConvert = localDateTime.atZone(ZoneId.systemDefault());
-        return utcStartConvert.toLocalDateTime();
+       /* ZonedDateTime utcStartConvert = localDateTime.atZone(ZoneId.systemDefault());
+        return utcStartConvert.toLocalDateTime();*/
 
     }
 

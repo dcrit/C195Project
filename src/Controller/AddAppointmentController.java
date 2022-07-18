@@ -148,9 +148,11 @@ public class AddAppointmentController implements Initializable {
         LocalDateTime start = convertToUTC(startDayAndTime);
         System.out.println("Start UTC Time " + start);
         LocalDateTime end = convertToUTC(endDayAndTime);
+        System.out.println("End UTC Time " + end);
 
         //Getting current time for create date and setting to UTC
         LocalDateTime createDate = LocalDateTime.now(ZoneOffset.UTC);
+        System.out.println("Create date in UTC " + createDate);
 
 
 
@@ -225,6 +227,8 @@ public class AddAppointmentController implements Initializable {
 
         return start.toLocalDateTime();
     }
+
+
 
     /**Clearing fields*/
     public void clearFields(){
