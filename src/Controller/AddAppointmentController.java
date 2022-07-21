@@ -116,8 +116,8 @@ public class AddAppointmentController implements Initializable {
         //Checking for null values
         AppointmentException.checkingForNullValues(titleTextField, descriptionTextField, locationTextField,
                 typeTextField, customerIdComboBox, contactIdComboBox, userIdComboBox, startDatePicker,
-                startTimeHrComboBoxFXID, startTimeMinComboBoxFXID, startTimeAMPMComboBox, endDatePicker, endTimeHrComboBoxFXID,
-                endTimeMinComboBoxFXID, endTimeAMPMComboBox);
+                startTimeHrComboBoxFXID, startTimeMinComboBoxFXID, startTimeAMPMComboBox, endDatePicker,
+                endTimeHrComboBoxFXID, endTimeMinComboBoxFXID, endTimeAMPMComboBox);
 
         //Placeholders for data
         int appointmentId = AppointmentQuery.createAppointmentId();
@@ -131,7 +131,6 @@ public class AddAppointmentController implements Initializable {
         int customerId = convertComboBoxesToInteger.apply(customerIdComboBox.getValue());
         String contactIdAndName =  contactIdComboBox.getValue();
         int contactId = Integer.parseInt(contactIdAndName.substring(0, contactIdAndName.indexOf(' ')));
-        System.out.println("Contact ID " + contactId);
         int userId = convertComboBoxesToInteger.apply(userIdComboBox.getValue());
 
 
@@ -162,8 +161,8 @@ public class AddAppointmentController implements Initializable {
                 !AppointmentException.checkForOverlappingTimes(start, end) &&
                 !AppointmentException.checkingEndTimeIsNotBeforeStartTime(start, end)) {
             //Inserting Appointment
-            DatabaseQuery.AppointmentQuery.createNewAppointment(appointmentId, title, description, location, type, start, end,
-                    createDate, createdBy, lastUpdate, lastUpdatedBy, customerId, userId, contactId);
+            DatabaseQuery.AppointmentQuery.createNewAppointment(appointmentId, title, description, location,
+                    type, start, end, createDate, createdBy, lastUpdate, lastUpdatedBy, customerId, userId, contactId);
 
             //Sends user back to main form
             Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/View/MainForm.fxml")));

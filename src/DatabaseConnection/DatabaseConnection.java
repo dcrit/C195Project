@@ -14,8 +14,8 @@ public abstract class DatabaseConnection {
     private static final String databaseName = "client_schedule";
     private static final String jbdURL = protocol + vendor + location + databaseName;
     private static final String driver = "com.mysql.cj.jdbc.Driver";
-    private static final String userName = "root";
-    private static final String password = "BurgApp304#$";
+    private static final String userName = "sqlUser";
+    private static final String password = "Passw0rd!";
     public static Connection connection;
 
     /**
@@ -27,7 +27,6 @@ public abstract class DatabaseConnection {
 
             Class.forName(driver);
             connection = DriverManager.getConnection(jbdURL, userName, password);
-            //System.out.println("Connection Successful!");
 
         }catch (Exception e){
             System.out.println("Error: " + e.getMessage());
@@ -43,7 +42,6 @@ public abstract class DatabaseConnection {
         try{
 
           connection.close();
-            //System.out.println("Connection Closed!");
         }catch (Exception e){
             System.out.println("Error: " + e.getMessage());
         }

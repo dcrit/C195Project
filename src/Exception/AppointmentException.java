@@ -292,12 +292,6 @@ public class AppointmentException {
             throw new Exception("Scheduled start time is outside of business hours");
         }
 
-        //Converts current user time and TZ to EST
-       /* ZoneId zoneId = ZoneId.systemDefault();
-        LocalDateTime ldt = LocalDateTime.now();
-        ZonedDateTime zdt = ldt.atZone(estZone);
-        ZonedDateTime convertZDT = zdt.withZoneSameInstant(ZoneId.of(String.valueOf(zoneId)));*/
-
         return false;
 
     }

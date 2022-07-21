@@ -227,7 +227,6 @@ public class AppointmentQuery {
 
     }
 
-
     /**
      * Select appointments from database for current month.
      * @param year Year
@@ -344,11 +343,9 @@ public class AppointmentQuery {
 
             while (rs.next()){
                 id = rs.getInt("Appointment_ID");
-                System.out.println("ID " + id);
                 start = rs.getTimestamp("Start").toLocalDateTime();
-                System.out.println("Start " + start);
                 end = rs.getTimestamp("End").toLocalDateTime();
-                System.out.println("End " + end);
+
             }
 
             if(id != 0 ) {
@@ -426,7 +423,6 @@ public class AppointmentQuery {
             id = Collections.max(appIds);
             id++;
             DatabaseConnection.closeConnection();
-            System.out.println("Appointment ID " + id);
             return id;
     }
 }
