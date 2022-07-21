@@ -2,41 +2,40 @@ WGU C195 GUI-based Scheduling Desktop Application
 Author: Daniel Crites
 Contact: dcrites5@wgu.edu
 IDE Version: IntelliJ IDEA 2021.2.3(Community Edition)
-JDK Version: JDK 17.0.1
+JDK Version: JDK 18.0.1
 Scene Builder Version: 17.0.0
 MySQL Connector Driver Version: mysql-connector-java-8.0.25
-Application Version: 1.0.1
-Date: 07/06/2022
+Application Version: 1.0.2
+Date: 07/21/2022
 
 Running the Application:
 A login page will appear when the application is opened. Please use the login information provided by your
-administrator to login. All logins, successful or unsuccessful, will be documented in a text file. The login page
-will also translate text in French if the user is in that region. Once you have successfully logged in, you will
-be brought to the Main Page of the application. You will also be notified if you have an upcoming appointment
-within the next 15 minutes once logged in.
+administrator to log in. All logins, successful or unsuccessful, will be documented in a text file. The login
+page will also translate text into French if the user is in that region. Once you have successfully logged in,
+you will be brought to the application's Main Page. Once logged in, you will also be notified if you have an upcoming
+appointment within the next 15 minutes or not.
 
-The Main Page reflects all appointments and customers in a table view. You can add, edit, or delete appointments
-or customers. You can view appointments by Month and week by selecting a radio button at the top of the
-appointments table. Reports can be view by selecting the reports button.
+The Main Page reflects all appointments and customers in a table view. You can add, edit, or delete
+appointments or customers. You can view appointments by month and week by selecting a radio button at the top
+of the appointments table. Reports can be viewed by selecting the reports button.
 
 You can add a new customer by selecting the Add Customer button below the customer table. When adding a new
-customer please provide first and last name in the Name field. You will need to provide what region
-(U.S, U.K, and Canada) the customer lives in, and a division will populate in the division box. Once all
-information is inputted, please select the save button at the button. Null values will not be accepted and
-will return an error message.
+customer, please provide your first and last name in the name field. You will need to provide what region
+(U.S, U.K, and Canada) the Customer lives in, and a division will populate in the division box. Once all information
+is inputted, please select the save button. Null values will not be accepted and will return an error message.
 
-To add an appointment to the appointment table please select the Add Appointment button. This will bring you
-to the add appointment page where you can specify what appointment is required for the customer. Please schedule
- all appointments within works hours of EST 8:00 AM – 10:00PM M-F. All times will automatically adjust to the
- user’s time zone and stored as UTC in the database.
+Please select the Add Appointment button to add an appointment to the appointment table. This will bring you
+to the add appointment page, where you can specify what appointment is required for the Customer. Please schedule
+all appointments within works hours of EST 8:00 AM – 10:00 PM M-F. All times will automatically adjust to the
+user's time zone and be stored as UTC in the database.
 
-The Reports page will have 3 specific reports: Customer appointments by month, type, and total, Customer by division
-and country, Schedule for contacts. The contacts schedule can be viewed when selecting a contact ID
+The Reports page will have three specific reports: Customer appointments by month, type, and total, Customers by division
+and country, and Schedule for contacts. The contact's schedule can be viewed when selecting a contact ID
 and then populates their schedule in the table view.
 
-Description of additional report:
-For my additional report I wanted to show the user break down of where each customer lived by division and country
-ascending. This could help management determine where the majority of their customers are coming from, or which
+Description of the additional report:
+For my other report, I wanted to show the user breakdown of where each Customer lived by division and country
+ascending. This could help management determine where most of their customers are coming from or which
 region may require more marketing and advertising.
 
 
