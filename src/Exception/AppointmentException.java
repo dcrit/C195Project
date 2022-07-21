@@ -1,6 +1,7 @@
 package Exception;
 
 import DatabaseConnection.DatabaseConnection;
+import Model.Contact;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
@@ -9,7 +10,6 @@ import javafx.scene.control.TextField;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Timestamp;
-import java.time.Duration;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.ZoneId;
@@ -101,7 +101,7 @@ public class AppointmentException {
      * @param location Location
      * @param type Type
      * @param customerId Customer ID
-     * @param contactId Contact ID
+     * @param contacts Contact ID
      * @param userId User ID
      * @param startDate Start Date
      * @param startHr Start Hour
@@ -114,7 +114,7 @@ public class AppointmentException {
      */
     public static boolean checkingForNullValues(TextField title, TextField description, TextField location,
                                                 TextField type, ComboBox<Integer> customerId,
-                                                ComboBox<Integer> contactId, ComboBox<Integer> userId,
+                                                ComboBox<String> contacts, ComboBox<Integer> userId,
                                                 DatePicker startDate, ComboBox<Integer> startHr,
                                                 ComboBox<Integer> startMin, ComboBox<String> startTimeAMPM, DatePicker endDate,
                                                 ComboBox<Integer> endHr, ComboBox<Integer> endMin, ComboBox<String> endTimeAMPM) throws Exception {
@@ -148,7 +148,7 @@ public class AppointmentException {
             alert.showAndWait();
             throw new Exception("Null Value");
         }
-        if(contactId.getValue() == null){
+        if(contacts.getValue() == null){
             Alert alert = new Alert(Alert.AlertType.WARNING, "Null Value");
             alert.setContentText("Contact ID field is empty");
             alert.showAndWait();

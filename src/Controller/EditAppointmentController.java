@@ -44,7 +44,7 @@ public class EditAppointmentController implements Initializable {
 
     //Combo Boxes
     @FXML private ComboBox<Integer> customerIdComboBox;
-    @FXML private ComboBox<Integer> contactIdComboBox;
+    @FXML private ComboBox<String> contactIdComboBox;
     @FXML private ComboBox<Integer> userIdComboBox;
     @FXML private ComboBox<Integer> startTimeHrComboBoxFXID;
     @FXML private ComboBox<Integer> startTimeMinComboBoxFXID;
@@ -97,7 +97,7 @@ public class EditAppointmentController implements Initializable {
         locationTextField.setText(passingAppointmentFromMain.getLocation());
         typeTextField.setText(passingAppointmentFromMain.getType());
         customerIdComboBox.setValue(passingAppointmentFromMain.getCustomerID());
-        contactIdComboBox.setValue(passingAppointmentFromMain.getContactID());
+        contactIdComboBox.setValue(ContactQuery.getContactsForEdit(passingAppointmentFromMain.getContactID()));
         userIdComboBox.setValue(passingAppointmentFromMain.getUserID());
         try {
             settingDatesForDatePickers();
@@ -134,6 +134,12 @@ public class EditAppointmentController implements Initializable {
         //Lambda Expression function that makes it easier to parse combo boxes
         Function<Integer, Integer> convertComboBoxesToInteger = Integer::valueOf;
 
+        //Checking for null values
+        AppointmentException.checkingForNullValues(titleTextField, descriptionTextField, locationTextField,
+                typeTextField, customerIdComboBox, contactIdComboBox, userIdComboBox, startDatePicker,
+                startTimeHrComboBoxFXID, startTimeMinComboBoxFXID, startTimeAMPMComboBox, endDatePicker, endTimeHrComboBoxFXID,
+                endTimeMinComboBoxFXID, endTimeAMPMComboBox);
+
         //Text Fields
         String title = titleTextField.getText();
         String description = descriptionTextField.getText();
@@ -143,7 +149,8 @@ public class EditAppointmentController implements Initializable {
         String lastUpdatedBy = UserQuery.user;
         LocalDateTime lastUpdate = LocalDateTime.now(ZoneOffset.UTC);
         int customerId = convertComboBoxesToInteger.apply(customerIdComboBox.getValue());
-        int contactId = convertComboBoxesToInteger.apply(contactIdComboBox.getValue());
+        String contactIdAndName =  contactIdComboBox.getValue();
+        int contactId = Integer.parseInt(contactIdAndName.substring(0, contactIdAndName.indexOf(' ')));
         int userId = convertComboBoxesToInteger.apply(userIdComboBox.getValue());
 
 
@@ -255,7 +262,7 @@ public class EditAppointmentController implements Initializable {
         ObservableList<Integer> customerIds = CustomerQuery.getCustomerId();
         customerIdComboBox.setItems(customerIds);
 
-        ObservableList<Integer> contactIds = ContactQuery.getContactId();
+        ObservableList<String> contactIds = ContactQuery.getContactIdAndName();
         contactIdComboBox.setItems(contactIds);
 
         ObservableList<Integer> userIds = UserQuery.getUserId();

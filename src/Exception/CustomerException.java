@@ -26,7 +26,7 @@ public class CustomerException {
                 Objects.equals(divisions.getValue(), null)){
 
             Alert alert = new Alert(Alert.AlertType.WARNING, "Incorrect Input");
-            alert.setContentText("Field can not be blank");
+            alert.setContentText("Error: Null Value");
             alert.showAndWait();
             throw new Exception("Check for null fields");
 

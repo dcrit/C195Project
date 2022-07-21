@@ -310,8 +310,6 @@ public class MainFormController implements Initializable {
 
         appointmentTable.refresh();
 
-
-
     }
 
     /**

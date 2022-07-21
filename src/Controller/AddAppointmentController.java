@@ -32,22 +32,22 @@ public class AddAppointmentController implements Initializable {
     //Text Fields
     @FXML private TextField titleTextField;
     @FXML private TextField descriptionTextField;
-    @FXML private  TextField locationTextField;
+    @FXML private TextField locationTextField;
     @FXML private TextField typeTextField;
 
     //Date Pickers
     @FXML private DatePicker startDatePicker;
-    @FXML private  DatePicker endDatePicker;
+    @FXML private DatePicker endDatePicker;
 
 
     //Combo Boxes
     @FXML private ComboBox<Integer> customerIdComboBox;
-    @FXML private ComboBox<Integer> contactIdComboBox;
+    @FXML private ComboBox<String> contactIdComboBox;
     @FXML private ComboBox<Integer> userIdComboBox;
     @FXML private ComboBox<Integer> startTimeHrComboBoxFXID;
     @FXML private ComboBox<Integer> startTimeMinComboBoxFXID;
-    @FXML private  ComboBox<Integer> endTimeHrComboBoxFXID;
-    @FXML private  ComboBox<Integer> endTimeMinComboBoxFXID;
+    @FXML private ComboBox<Integer> endTimeHrComboBoxFXID;
+    @FXML private ComboBox<Integer> endTimeMinComboBoxFXID;
     @FXML private ComboBox<String> startTimeAMPMComboBox;
     @FXML private ComboBox<String> endTimeAMPMComboBox;
 
@@ -115,10 +115,11 @@ public class AddAppointmentController implements Initializable {
         //Checking for null values
         AppointmentException.checkingForNullValues(titleTextField, descriptionTextField, locationTextField,
                 typeTextField, customerIdComboBox, contactIdComboBox, userIdComboBox, startDatePicker,
-                startTimeHrComboBoxFXID,startTimeMinComboBoxFXID, startTimeAMPMComboBox, endDatePicker, endTimeHrComboBoxFXID,
-                endTimeMinComboBoxFXID,  endTimeAMPMComboBox);
+                startTimeHrComboBoxFXID, startTimeMinComboBoxFXID, startTimeAMPMComboBox, endDatePicker, endTimeHrComboBoxFXID,
+                endTimeMinComboBoxFXID, endTimeAMPMComboBox);
 
         //Placeholders for data
+        int appointmentId = AppointmentQuery.createAppointmentId();
         String title = titleTextField.getText();
         String description = descriptionTextField.getText();
         String location = locationTextField.getText();
@@ -127,7 +128,9 @@ public class AddAppointmentController implements Initializable {
         String lastUpdatedBy = UserQuery.user;
         LocalDateTime lastUpdate = LocalDateTime.now(ZoneOffset.UTC);
         int customerId = convertComboBoxesToInteger.apply(customerIdComboBox.getValue());
-        int contactId = convertComboBoxesToInteger.apply(contactIdComboBox.getValue());
+        String contactIdAndName =  contactIdComboBox.getValue();
+        int contactId = Integer.parseInt(contactIdAndName.substring(0, contactIdAndName.indexOf(' ')));
+        System.out.println("Contact ID " + contactId);
         int userId = convertComboBoxesToInteger.apply(userIdComboBox.getValue());
 
 
@@ -137,7 +140,6 @@ public class AddAppointmentController implements Initializable {
                         startTimeHrComboBoxFXID.getValue() + ":" +
                         paddingTimesForDBEntry(String.valueOf(startTimeMinComboBoxFXID.getValue())) +
                                 " " + startTimeAMPMComboBox.getValue();
-        System.out.println(startDayAndTime);
         String endDayAndTime = endDatePicker.getValue() + " "+
                 endTimeHrComboBoxFXID.getValue() + ":" +
                 paddingTimesForDBEntry(String.valueOf(endTimeMinComboBoxFXID.getValue())) +
@@ -146,14 +148,12 @@ public class AddAppointmentController implements Initializable {
 
         //Converting scheduled start and end times to UTC and LocalDateTime
         LocalDateTime start = convertToUTC(startDayAndTime);
-        System.out.println("Start UTC Time " + start);
+
         LocalDateTime end = convertToUTC(endDayAndTime);
-        System.out.println("End UTC Time " + end);
+
 
         //Getting current time for create date and setting to UTC
         LocalDateTime createDate = LocalDateTime.now(ZoneOffset.UTC);
-        System.out.println("Create date in UTC " + createDate);
-
 
 
         //Checks for overlapping times and within business hours, then inserts appointment
@@ -161,8 +161,8 @@ public class AddAppointmentController implements Initializable {
                 !AppointmentException.checkForOverlappingTimes(start, end) &&
                 !AppointmentException.checkingEndTimeIsNotBeforeStartTime(start, end)) {
             //Inserting Appointment
-            DatabaseQuery.AppointmentQuery.createNewAppointment(title, description, location, type, start, end,
-                    createDate, createdBy, lastUpdate, lastUpdatedBy, customerId, contactId, userId);
+            DatabaseQuery.AppointmentQuery.createNewAppointment(appointmentId, title, description, location, type, start, end,
+                    createDate, createdBy, lastUpdate, lastUpdatedBy, customerId, userId, contactId);
 
             //Sends user back to main form
             Parent root = FXMLLoader.load(getClass().getResource("/View/MainForm.fxml"));
@@ -201,7 +201,7 @@ public class AddAppointmentController implements Initializable {
         ObservableList<Integer> customerIds = CustomerQuery.getCustomerId();
         customerIdComboBox.setItems(customerIds);
 
-        ObservableList<Integer> contactIds = ContactQuery.getContactId();
+        ObservableList<String> contactIds = ContactQuery.getContactIdAndName();
         contactIdComboBox.setItems(contactIds);
 
         ObservableList<Integer> userIds = UserQuery.getUserId();

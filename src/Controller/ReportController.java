@@ -37,7 +37,7 @@ public class ReportController implements Initializable {
     @FXML private TableColumn<Report1, Integer> report1TotalCol;
 
     //Table for report 2
-    @FXML private ComboBox<Integer> contactIdComboBox;
+    @FXML private ComboBox<String> contactIdComboBox;
     @FXML private TableView<Report2> report2Table;
     @FXML private TableColumn<Report2, Integer> report2AppointmentIdCol;
     @FXML private TableColumn<Report2, String> report2TitleCol;
@@ -97,7 +97,7 @@ public class ReportController implements Initializable {
      */
    public void gettingAndSettingContactId() throws Exception {
 
-       ObservableList<Integer> contactId = ContactQuery.getContactId();
+       ObservableList<String> contactId = ContactQuery.getContactIdAndName();
        contactIdComboBox.setItems(contactId);
 
    }
@@ -134,7 +134,10 @@ public class ReportController implements Initializable {
 
         report2.clear();
 
-        report2Table.setItems(ReportQuery.report2(contactIdComboBox));
+        String test =  contactIdComboBox.getValue();
+        int contactId = Integer.parseInt(test.substring(0, test.indexOf(' ')));
+
+        report2Table.setItems(ReportQuery.report2(contactId));
         report2AppointmentIdCol.setCellValueFactory(new PropertyValueFactory<>("appointmentId"));
         report2TitleCol.setCellValueFactory(new PropertyValueFactory<>("title"));
         report2TypeCol.setCellValueFactory(new PropertyValueFactory<>("type"));

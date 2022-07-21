@@ -14,6 +14,7 @@ import java.sql.Timestamp;
 import java.text.ParseException;
 import java.time.*;
 import java.time.format.DateTimeFormatter;
+import java.util.Collections;
 import java.util.Optional;
 
 /**Appointment Query*/
@@ -68,7 +69,6 @@ public class AppointmentQuery {
 
     }
 
-
     /**
      * Inserts new customer to database
      * @param title Title
@@ -85,30 +85,31 @@ public class AppointmentQuery {
      * @param userId User ID
      * @param contactId Contact ID
      */
-    public static void createNewAppointment(String title, String description, String location, String type,
+    public static void createNewAppointment(int id, String title, String description, String location, String type,
                                             LocalDateTime startTimestamp, LocalDateTime endTimestamp, LocalDateTime createDate,
                                             String createdBy, LocalDateTime lastUpdate, String lastUpdatedBy,
                                             int customerId, int userId, int contactId){
 
         try {
-            String insertAppointment = "INSERT INTO appointments (Title, Description, Location, Type, Start, End, " +
+            String insertAppointment = "INSERT INTO appointments (Appointment_ID, Title, Description, Location, Type, Start, End, " +
                     "Create_Date, Created_By, Last_Update, Last_Updated_By, Customer_ID, User_ID, Contact_ID) " +
-                    "VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?) ";
+                    "VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?) ";
             DatabaseConnection.getConnection();
             PreparedStatement ps = DatabaseConnection.connection.prepareStatement(insertAppointment);
-            ps.setString(1, title);
-            ps.setString(2, description);
-            ps.setString(3, location);
-            ps.setString(4,type);
-            ps.setTimestamp(5, Timestamp.valueOf(startTimestamp));
-            ps.setTimestamp(6, Timestamp.valueOf(endTimestamp));
-            ps.setTimestamp(7, Timestamp.valueOf(createDate));
-            ps.setString(8, createdBy);
-            ps.setTimestamp(9, Timestamp.valueOf(lastUpdate));
-            ps.setString(10, lastUpdatedBy);
-            ps.setInt(11, customerId);
-            ps.setInt(12,userId);
-            ps.setInt(13, contactId);
+            ps.setInt(1, id);
+            ps.setString(2, title);
+            ps.setString(3, description);
+            ps.setString(4, location);
+            ps.setString(5,type);
+            ps.setTimestamp(6, Timestamp.valueOf(startTimestamp));
+            ps.setTimestamp(7, Timestamp.valueOf(endTimestamp));
+            ps.setTimestamp(8, Timestamp.valueOf(createDate));
+            ps.setString(9, createdBy);
+            ps.setTimestamp(10, Timestamp.valueOf(lastUpdate));
+            ps.setString(11, lastUpdatedBy);
+            ps.setInt(12, customerId);
+            ps.setInt(13,userId);
+            ps.setInt(14, contactId);
             int insertSuccessful = ps.executeUpdate();
 
             if(insertSuccessful > 0) {
@@ -185,7 +186,6 @@ public class AppointmentQuery {
         }catch (Exception e){
             e.printStackTrace();
         }
-
 
     }
 
@@ -325,7 +325,6 @@ public class AppointmentQuery {
 
         LocalDateTime ldt = LocalDateTime.now();
         ldt = convertToUTC(ldt);
-        System.out.println("LDT " + ldt);
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 
         String ldtString = ldt.format(formatter);
@@ -353,11 +352,15 @@ public class AppointmentQuery {
             }
 
             if(id != 0 ) {
-                Alert alert = new Alert(Alert.AlertType.WARNING, "Up Coming Appointment");
+                Alert alert = new Alert(Alert.AlertType.WARNING, "Upcoming Appointment");
                 alert.setContentText("Upcoming Appointment! \n" +
                         "Appointment ID: " + id + "\n" +
                         "Start Time: " + timeCovertForLocalDateTimeCurrentZone(start)+ "\n" +
                         "End Time: " + timeCovertForLocalDateTimeCurrentZone(end));
+                alert.showAndWait();
+            } else {
+                Alert alert = new Alert(Alert.AlertType.WARNING, "No upcoming Appointment");
+                alert.setContentText("You have no upcoming appointments");
                 alert.showAndWait();
             }
 
@@ -381,25 +384,49 @@ public class AppointmentQuery {
 
         return convertedZDT.toLocalDateTime();
 
-       /* System.out.println("UTC Time " + localDateTime);
-        String input = localDateTime.toString();
-        LocalDateTime ldt = LocalDateTime.parse(input);
-        OffsetDateTime odt = ldt.atOffset(ZoneOffset.UTC);
-        ZoneId z = ZoneId.systemDefault();
-        ZonedDateTime  zdt = odt.atZoneSameInstant(z);*/
-       // System.out.println("System Default Time " + zdt.toLocalDateTime());
-       /* ZonedDateTime utcStartConvert = localDateTime.atZone(ZoneId.systemDefault());
-        return utcStartConvert.toLocalDateTime();*/
 
     }
 
-        public static LocalDateTime convertToUTC(LocalDateTime utcString) throws ParseException {
+    /**
+     * Converts time to UTC
+     * @param utcString Takes in a string to parse
+     * @return Returns the parsed time to UTC
+     * @throws ParseException
+     */
+    public static LocalDateTime convertToUTC(LocalDateTime utcString) throws ParseException {
 
-            ZonedDateTime utcStartConvert = utcString.atZone(ZoneId.systemDefault());
-            ZonedDateTime start = utcStartConvert.withZoneSameInstant(ZoneOffset.UTC);
+        ZonedDateTime utcStartConvert = utcString.atZone(ZoneId.systemDefault());
+        ZonedDateTime start = utcStartConvert.withZoneSameInstant(ZoneOffset.UTC);
 
-            return start.toLocalDateTime();
-        }
+        return start.toLocalDateTime();
+    }
 
 
+    /**
+     * Generating appointment ID
+     * @return Returns max number + 1
+     */
+    public static int createAppointmentId(){
+        int id;
+        ObservableList<Integer> appIds =  FXCollections.observableArrayList();
+            try {
+                DatabaseConnection.getConnection();
+                String selectingIds = "SELECT Appointment_ID FROM appointments";
+                PreparedStatement ps = DatabaseConnection.connection.prepareStatement(selectingIds);
+                ResultSet rs = ps.executeQuery();
+
+                while (rs.next()){
+
+                    appIds.add(rs.getInt("Appointment_ID"));
+                }
+
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+            id = Collections.max(appIds);
+            id++;
+            DatabaseConnection.closeConnection();
+            System.out.println("Appointment ID " + id);
+            return id;
+    }
 }

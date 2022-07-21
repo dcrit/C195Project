@@ -55,7 +55,7 @@ public class ReportQuery {
      * @param contactId Contact ID
      * @return Returns a list of contact ID's
      */
-    public static ObservableList<Report2> report2(ComboBox<Integer> contactId){
+    public static ObservableList<Report2> report2(int contactId){
 
         ObservableList<Report2> report2List = FXCollections.observableArrayList();
 
@@ -66,7 +66,7 @@ public class ReportQuery {
                     " appointments.Description, \n" +
                     " appointments.Start, \n" +
                     " appointments.End, \n" +
-                    " appointments.Customer_ID from appointments where Contact_ID = " + contactId.getValue();
+                    " appointments.Customer_ID from appointments where Contact_ID = " + contactId;
             DatabaseConnection.getConnection();
             PreparedStatement ps = DatabaseConnection.connection.prepareStatement(selectReport2);
             ResultSet rs = ps.executeQuery();
