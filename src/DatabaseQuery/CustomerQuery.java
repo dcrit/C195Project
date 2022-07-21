@@ -6,7 +6,6 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
-
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -21,7 +20,7 @@ public abstract class CustomerQuery {
     /**
      * Retrieves all customers from database.
      * @return Returns list of customers
-     * @throws Exception
+     * @throws Exception Throws Exception
      */
     public static ObservableList<Customer> getCustomers() throws Exception {
 
@@ -197,7 +196,7 @@ public abstract class CustomerQuery {
     /**
      * Deletes customer
      * @param deleteCustomer Delete Customer
-     * @throws Exception
+     * @throws Exception Throws Exception
      */
     public static void deleteCustomer(Customer deleteCustomer) throws Exception {
 

@@ -82,6 +82,7 @@ public class ReportController implements Initializable {
                 e.printStackTrace();
             }
             Stage stage = (Stage) ((Button) actionEvent.getSource()).getScene().getWindow();
+            assert root != null;
             Scene scene = new Scene(root, 925, 600);
             stage.setTitle("Main Form");
             stage.setScene(scene);
@@ -93,7 +94,7 @@ public class ReportController implements Initializable {
 
     /**
      * Setting ID's to combo box
-     * @throws Exception
+     * @throws Exception Throws Exception
      */
    public void gettingAndSettingContactId() throws Exception {
 

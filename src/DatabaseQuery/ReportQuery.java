@@ -6,7 +6,6 @@ import Model.Report2;
 import Model.Report3;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.scene.control.ComboBox;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.time.LocalDateTime;
@@ -19,7 +18,7 @@ public class ReportQuery {
     /**
      * Retrieves the report date for report 1.
      * @return Returns a list for report 1
-     * @throws Exception
+     * @throws Exception Throws Exception
      */
     public static ObservableList<Report1> report1() throws Exception {
 

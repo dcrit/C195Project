@@ -48,8 +48,8 @@ public class AddCustomerController implements Initializable {
 
     /**
      * Initializer
-     * @param url
-     * @param resourceBundle
+     * @param url URL
+     * @param resourceBundle Resource Bundle
      */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -65,6 +65,7 @@ public class AddCustomerController implements Initializable {
                 e.printStackTrace();
             }
             Stage stage = (Stage) ((Button) actionEvent.getSource()).getScene().getWindow();
+            assert root != null;
             Scene scene = new Scene(root, 925, 600);
             stage.setTitle("Main Form");
             stage.setScene(scene);
@@ -87,7 +88,7 @@ public class AddCustomerController implements Initializable {
     /**
      * Combo box for divisions.
      * @param actionEvent Action event when box is selected.
-     * @throws Exception
+     * @throws Exception Throws Exception
      */
     public void divisionComboBox(ActionEvent actionEvent) throws Exception {
 
@@ -98,7 +99,7 @@ public class AddCustomerController implements Initializable {
     /**
      * Saves the new customer to database.
      * @param actionEvent Action event when button is selected.
-     * @throws Exception
+     * @throws Exception Throws Exception
      */
     public void save(ActionEvent actionEvent) throws Exception {
 
@@ -122,7 +123,7 @@ public class AddCustomerController implements Initializable {
                 lastUpdate, lastUpdatedBy, divisionID);
 
         //Returning to main form
-        Parent root = FXMLLoader.load(getClass().getResource("/View/MainForm.fxml"));
+        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/View/MainForm.fxml")));
         Stage stage = (Stage) ((Button) actionEvent.getSource()).getScene().getWindow();
         Scene scene = new Scene(root, 925, 600);
         stage.setTitle("Add Customer");
@@ -178,7 +179,7 @@ public class AddCustomerController implements Initializable {
 
     /**
      * Getting division ID's.
-     * @throws Exception
+     * @throws Exception Throws Exception
      */
     public void gettingDivisionID() throws Exception {
 

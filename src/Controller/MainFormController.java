@@ -90,7 +90,7 @@ public class MainFormController implements Initializable {
 
     /**
      * Sets table with appointments from database.
-     * @throws Exception
+     * @throws Exception Throws Exception
      */
     public void fetchAppointments() throws Exception {
 
@@ -123,7 +123,7 @@ public class MainFormController implements Initializable {
 
     /**
      * Sets customers from database to table.
-     * @throws Exception
+     * @throws Exception Throws Exception
      */
     public void fetchCustomers() throws Exception {
 
@@ -153,7 +153,7 @@ public class MainFormController implements Initializable {
     /**
      * Takes user to add appointment page.
      * @param actionEvent Action event when button is selected.
-     * @throws IOException
+     * @throws IOException Throws IOException
      */
     public void addAppointment(ActionEvent actionEvent) throws IOException {
 
@@ -170,7 +170,7 @@ public class MainFormController implements Initializable {
     /**
      * Deletes user from table and database
      * @param actionEvent Action event when button is selected.
-     * @throws Exception
+     * @throws Exception Throws Exception
      */
     public void deleteAppointment(ActionEvent actionEvent) throws Exception {
 
@@ -195,7 +195,7 @@ public class MainFormController implements Initializable {
     /**
      * Take user to edit appointment page.
      * @param actionEvent Action event when button is selected.
-     * @throws IOException
+     * @throws IOException Throw IOException
      */
     public void editAppointment(ActionEvent actionEvent) throws IOException {
 
@@ -217,7 +217,7 @@ public class MainFormController implements Initializable {
     /**
      * Take user to add customer page.
      * @param actionEvent Action event when button is selected.
-     * @throws IOException
+     * @throws IOException Throws Exception
      */
     public void addCustomer(ActionEvent actionEvent) throws IOException {
 
@@ -233,7 +233,7 @@ public class MainFormController implements Initializable {
     /**
      * Takes user to edit customer page.
      * @param actionEvent Action event when button is selected.
-     * @throws IOException
+     * @throws IOException Throw IOException
      */
     public void editCustomer(ActionEvent actionEvent) throws IOException {
 
@@ -256,7 +256,7 @@ public class MainFormController implements Initializable {
     /**
      * Deletes customer from table and database
      * @param actionEvent Action event when button is selected.
-     * @throws Exception
+     * @throws Exception Throws Exception
      */
     public void deleteCustomer(ActionEvent actionEvent) throws Exception {
 
@@ -280,7 +280,7 @@ public class MainFormController implements Initializable {
     /**
      * Shows all appointments for current month
      * @param actionEvent Action event when button is selected.
-     * @throws Exception
+     * @throws Exception Throws Exception
      */
     public void monthView(ActionEvent actionEvent) throws Exception {
 
@@ -314,8 +314,8 @@ public class MainFormController implements Initializable {
 
     /**
      * Shows all current appointments for current week, M-F.
-     * @param actionEvent
-     * @throws IOException
+     * @param actionEvent Action for week view
+     * @throws IOException Throws IOException
      */
     public void weekView(ActionEvent actionEvent) throws IOException {
 
@@ -351,7 +351,7 @@ public class MainFormController implements Initializable {
     /**
      * Sets retrieved appointments to table.
      * @param actionEvent Action event when button is selected.
-     * @throws Exception
+     * @throws Exception Throws Exception
      */
     public void allAppointments(ActionEvent actionEvent) throws Exception {
 
@@ -387,8 +387,8 @@ public class MainFormController implements Initializable {
 
     /**
      * Takes user to report page
-     * @param actionEvent
-     * @throws IOException
+     * @param actionEvent Reports action button
+     * @throws IOException Throws IOException
      */
     public void reports(ActionEvent actionEvent) throws IOException {
 

@@ -20,7 +20,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-
 import java.io.IOException;
 import java.net.URL;
 import java.sql.PreparedStatement;
@@ -95,6 +94,7 @@ public class EditCustomerController implements Initializable {
                 e.printStackTrace();
             }
             Stage stage = (Stage) ((Button) actionEvent.getSource()).getScene().getWindow();
+            assert root != null;
             Scene scene = new Scene(root, 925, 600);
             stage.setTitle("Main Form");
             stage.setScene(scene);
@@ -116,7 +116,7 @@ public class EditCustomerController implements Initializable {
     /**
      * Combo box for divisions.
      * @param actionEvent Action event when box is selected.
-     * @throws Exception
+     * @throws Exception Throws Exception
      */
     public void divisionComboBox(ActionEvent actionEvent) throws Exception {
 
@@ -127,7 +127,7 @@ public class EditCustomerController implements Initializable {
     /**
      * Updating the customer to database.
      * @param actionEvent Action event when button is selected.
-     * @throws Exception
+     * @throws Exception Throw Exception
      */
     public void save(ActionEvent actionEvent) throws Exception {
 
@@ -150,7 +150,7 @@ public class EditCustomerController implements Initializable {
                 passingCustomerFromMain.getCustomerID());
 
         //Return user to main form
-        Parent root = FXMLLoader.load(getClass().getResource("/View/MainForm.fxml"));
+        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/View/MainForm.fxml")));
         Stage stage = (Stage) ((Button) actionEvent.getSource()).getScene().getWindow();
         Scene scene = new Scene(root, 925, 600);
         stage.setTitle("Add Customer");
@@ -164,7 +164,7 @@ public class EditCustomerController implements Initializable {
 
     /**
      * Getting and setting data for combo boxes.
-     * @throws Exception
+     * @throws Exception Throws Exception
      */
     public void settingComboBoxes() throws Exception {
 
@@ -204,6 +204,7 @@ public class EditCustomerController implements Initializable {
         ObservableList<String> countriesList = FXCollections.observableArrayList();
 
         ObservableList<Country> countries = CountryQuery.getCountries();
+        assert countries != null;
         for (Country country: countries){
 
             countriesList.add(country.getCountry());
@@ -225,6 +226,7 @@ public class EditCustomerController implements Initializable {
         ObservableList<FirstLevelDivision> firstLevelDivisions = FirstLevelDivisionQuery.getDivision(country);
 
 
+        assert firstLevelDivisions != null;
         for (FirstLevelDivision fld: firstLevelDivisions){
 
             divisionList.add(fld.getDivision());
@@ -244,6 +246,7 @@ public class EditCustomerController implements Initializable {
         ObservableList<String> divisionList = FXCollections.observableArrayList();
         ObservableList<FirstLevelDivision> firstLevelDivisions = FirstLevelDivisionQuery.getDivision(country);
 
+        assert firstLevelDivisions != null;
         for (FirstLevelDivision fld: firstLevelDivisions){
 
             divisionList.add(fld.getDivision());
@@ -255,7 +258,7 @@ public class EditCustomerController implements Initializable {
 
     /**
      * Getting division ID's.
-     * @throws Exception
+     * @throws Exception Throws Exception
      */
     public void gettingDivisionID() throws Exception {
 

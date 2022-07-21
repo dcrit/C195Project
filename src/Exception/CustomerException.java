@@ -16,7 +16,7 @@ public class CustomerException {
      * @param country Country
      * @param divisions Divisions
      * @return Return true or false
-     * @throws Exception
+     * @throws Exception Throws Exception
      */
     public static boolean checkForNullValues(String name, String address, String postalCode, String phone,
                                              ComboBox<String> country, ComboBox<String> divisions) throws Exception {

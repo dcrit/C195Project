@@ -114,6 +114,7 @@ public class EditAppointmentController implements Initializable {
                 e.printStackTrace();
             }
             Stage stage = (Stage) ((Button) actionEvent.getSource()).getScene().getWindow();
+            assert root != null;
             Scene scene = new Scene(root, 925, 600);
             stage.setTitle("Main Form");
             stage.setScene(scene);
@@ -127,7 +128,7 @@ public class EditAppointmentController implements Initializable {
      * Save Button
      * Updating appointment to database and using a lambda function for combo boxes.
      * @param actionEvent Takes in an action event(button click).
-     * @throws Exception
+     * @throws Exception Throws Exception
      */
     public void save(ActionEvent actionEvent) throws Exception {
 
@@ -197,7 +198,7 @@ public class EditAppointmentController implements Initializable {
 
     /**
      * Setting the date picker from the passed appointment
-     * @throws ParseException
+     * @throws ParseException Throws Parse Exception
      */
     public void settingDatesForDatePickers() throws ParseException {
 
@@ -242,7 +243,7 @@ public class EditAppointmentController implements Initializable {
      * Converts the 24-hour time to a 12-hour time
      * @param str Takes in a date and time string
      * @return Returns the converted 12-hour time as a string
-     * @throws ParseException
+     * @throws ParseException Throws Parse Exception
      */
     public String convert12(String str) throws ParseException {
 
@@ -255,7 +256,7 @@ public class EditAppointmentController implements Initializable {
 
     /**
      * Getting Id's from database and setting them in combo boxes
-     * @throws Exception
+     * @throws Exception Throws Exception
      */
     public void gettingAndSettingIds() throws Exception {
 

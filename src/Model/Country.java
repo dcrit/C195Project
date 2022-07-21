@@ -14,11 +14,15 @@ public class Country {
     private LocalDateTime lastUpdate;
     private String lastUpdatedBy;
 
-
-    public Country(){
-
-    }
-    //Constructor
+    /**
+     * Constructor for country
+     * @param countryID Country ID
+     * @param country Country
+     * @param createDate Date created
+     * @param createdBy Created by
+     * @param lastUpdate Last update
+     * @param lastUpdatedBy Last updated by
+     */
     public Country(int countryID, String country, LocalDate createDate, String createdBy, LocalDateTime lastUpdate, String lastUpdatedBy) {
         this.countryID = countryID;
         this.country = country;
@@ -27,52 +31,42 @@ public class Country {
         this.lastUpdate = lastUpdate;
         this.lastUpdatedBy = lastUpdatedBy;
     }
+    public Country(){
 
-    //Getters and setters
+    }
+
+    //Getters and Setters
     public int getCountryID() {
         return countryID;
     }
-
     public void setCountryID(int countryID) {
         this.countryID = countryID;
     }
-
     public String getCountry() {
         return country;
     }
-
     public void setCountry(String country) {
         this.country = country;
     }
-
     public LocalDate getCreateDate() {
         return createDate;
     }
-
     public void setCreateDate(LocalDate createDate) {
         this.createDate = createDate;
     }
-
-    public String getCreatedBy() {
-        return createdBy;
-    }
-
+    public String getCreatedBy() {return createdBy;}
     public void setCreatedBy(String createdBy) {
         this.createdBy = createdBy;
     }
-
     public LocalDateTime getLastUpdate() {
         return lastUpdate;
     }
-
     public void setLastUpdate(LocalDateTime lastUpdate) {
         this.lastUpdate = lastUpdate;
     }
-
     public String getLastUpdatedBy() {
         return lastUpdatedBy;
     }
-
     public void setLastUpdatedBy(String lastUpdatedBy) {
         this.lastUpdatedBy = lastUpdatedBy;
     }

@@ -59,7 +59,7 @@ public class MainFormException {
 
     /**
      * Checks for null vale for delete customer
-     * @param deleteCustomer
+     * @param deleteCustomer delete customer
      */
     public static void nullValueForDeleteCustomer(Customer deleteCustomer){
 
@@ -73,7 +73,7 @@ public class MainFormException {
     /**
      * Checks if customer has a schedule appointment
      * @param id ID
-     * @throws Exception
+     * @throws Exception Throws Exception
      */
     public static void checkIfCustomerHasAnAppointment(int id) throws Exception {
 

@@ -91,6 +91,7 @@ public class AddAppointmentController implements Initializable {
                 e.printStackTrace();
             }
             Stage stage = (Stage) ((Button) actionEvent.getSource()).getScene().getWindow();
+            assert root != null;
             Scene scene = new Scene(root, 925, 600);
             stage.setTitle("Main Form");
             stage.setScene(scene);
@@ -103,7 +104,7 @@ public class AddAppointmentController implements Initializable {
     /** Save Button
      *  Saving appointment to database and using a lambda function for combo boxes
      *  @param actionEvent Takes in an action event(button click)
-     *  @throws Exception
+     *  @throws Exception Throws Exception
      */
     @FXML
     public  void save(ActionEvent actionEvent) throws Exception {
@@ -165,7 +166,7 @@ public class AddAppointmentController implements Initializable {
                     createDate, createdBy, lastUpdate, lastUpdatedBy, customerId, userId, contactId);
 
             //Sends user back to main form
-            Parent root = FXMLLoader.load(getClass().getResource("/View/MainForm.fxml"));
+            Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/View/MainForm.fxml")));
             Stage stage = (Stage) ((Button) actionEvent.getSource()).getScene().getWindow();
             Scene scene = new Scene(root, 925, 600);
             stage.setTitle("Main Menu");
@@ -194,7 +195,7 @@ public class AddAppointmentController implements Initializable {
 
     /**
      * Pulling Customers Ids, Contact Ids, and User Ids to load in combo boxes
-     * @throws Exception
+     * @throws Exception Throws Exception
      */
     public void gettingAndSettingIds() throws Exception {
 
@@ -213,7 +214,7 @@ public class AddAppointmentController implements Initializable {
      * Converts the scheduled appointment time to UTC for database use
      * @param utcString Takes in a date and time string
      * @return Returns the adjusted UTC time
-     * @throws ParseException
+     * @throws ParseException Throws ParseException
      */
     public LocalDateTime convertToUTC(String utcString) throws ParseException {
 

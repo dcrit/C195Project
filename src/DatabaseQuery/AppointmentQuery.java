@@ -24,7 +24,7 @@ public class AppointmentQuery {
     /**
      * Selecting all appointments from database
      * @return Returns list of appointments
-     * @throws Exception
+     * @throws Exception Throws Exception
      */
     public static ObservableList<Appointment> getAppointments() throws Exception {
 
@@ -192,7 +192,7 @@ public class AppointmentQuery {
     /**
      * Deletes appointment from database with given appointment ID.
      * @param appointment Appointment
-     * @throws Exception
+     * @throws Exception Throws Exception
      */
     public static void deleteAppointment(Appointment appointment) throws Exception {
 
@@ -319,7 +319,7 @@ public class AppointmentQuery {
 
     /**
      * Checks for upcoming appointments
-     * @throws ParseException
+     * @throws ParseException Throws ParseException
      */
     public static void upcomingAppointments() throws ParseException {
 
@@ -391,7 +391,7 @@ public class AppointmentQuery {
      * Converts time to UTC
      * @param utcString Takes in a string to parse
      * @return Returns the parsed time to UTC
-     * @throws ParseException
+     * @throws ParseException Throws ParseException
      */
     public static LocalDateTime convertToUTC(LocalDateTime utcString) throws ParseException {
 

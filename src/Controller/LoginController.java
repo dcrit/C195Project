@@ -16,7 +16,6 @@ import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.Locale;
 import java.util.Objects;
-
 import java.util.Optional;
 import java.util.ResourceBundle;
 import DatabaseQuery.UserQuery;
@@ -81,7 +80,7 @@ public class LoginController implements Initializable {
      * Checks for upcoming appointments within 15 minutes.
      * A logged is used for successful and unsuccessful logins.
      * @param actionEvent Action event when button is selected.
-     * @throws Exception
+     * @throws Exception Throws Exception
      */
     public void login(ActionEvent actionEvent) throws Exception {
 
@@ -106,7 +105,7 @@ public class LoginController implements Initializable {
                     Optional<ButtonType> confirmLogin = alert.showAndWait();
 
                     if (confirmLogin.isPresent() && confirmLogin.get() == okButton) {
-                        Parent root = FXMLLoader.load(LoginException.class.getResource("/View/MainForm.fxml"));
+                        Parent root = FXMLLoader.load(Objects.requireNonNull(LoginException.class.getResource("/View/MainForm.fxml")));
                         Stage stage = (Stage) ((Button) actionEvent.getSource()).getScene().getWindow();
                         Scene scene = new Scene(root, 925, 600);
                         stage.setTitle("Main Form");
@@ -161,7 +160,7 @@ public class LoginController implements Initializable {
      * Logger for user activity
      * @param aBoolean Boolean for successful login
      * @param user Takes string for user and adds to logger
-     * @throws IOException
+     * @throws IOException Throws IOException
      */
     public void userActivity(Boolean aBoolean, String user) throws IOException {
 

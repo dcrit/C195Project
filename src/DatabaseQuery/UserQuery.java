@@ -52,7 +52,7 @@ public class UserQuery {
     /**
      * Retrieves user Id's from database.
      * @return Returns list of user Id's
-     * @throws Exception
+     * @throws Exception Throws Exception
      */
     public static ObservableList<Integer> getUserId() throws Exception {
 

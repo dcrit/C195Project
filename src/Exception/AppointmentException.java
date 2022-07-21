@@ -1,7 +1,6 @@
 package Exception;
 
 import DatabaseConnection.DatabaseConnection;
-import Model.Contact;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
@@ -24,7 +23,7 @@ public class AppointmentException {
      * @param start Start
      * @param end End
      * @return Returns true or false
-     * @throws Exception
+     * @throws Exception Throws Exception
      */
     public static boolean checkForOverlappingTimes(LocalDateTime start , LocalDateTime end) throws Exception {
 
@@ -61,7 +60,7 @@ public class AppointmentException {
      * @param end End
      * @param id Id
      * @return Returns
-     * @throws Exception
+     * @throws Exception Throws Exception
      */
     public static boolean checkForOverLappingTimesForEditedAppointment(LocalDateTime start, LocalDateTime end, int id) throws Exception {
 
@@ -110,7 +109,7 @@ public class AppointmentException {
      * @param endHr End Hour
      * @param endMin End Minute
      * @return Returns true or false
-     * @throws Exception
+     * @throws Exception Throws Exception
      */
     public static boolean checkingForNullValues(TextField title, TextField description, TextField location,
                                                 TextField type, ComboBox<Integer> customerId,
@@ -217,7 +216,7 @@ public class AppointmentException {
      * @param start Start
      * @param end End
      * @return Returns true or false
-     * @throws Exception
+     * @throws Exception Throws Exception
      */
     public static boolean checkForESTWorkHours(LocalDateTime start, LocalDateTime end) throws Exception {
 

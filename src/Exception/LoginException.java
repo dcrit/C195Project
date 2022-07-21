@@ -11,7 +11,7 @@ public class LoginException {
      * @param username User Name
      * @param password Password
      * @return Returns true or false
-     * @throws Exception
+     * @throws Exception Throws Exception
      */
     public static boolean checkForNullValues(String username, String password) throws Exception {
 

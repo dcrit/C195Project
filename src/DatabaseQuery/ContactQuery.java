@@ -15,7 +15,7 @@ public class ContactQuery {
     /**
      * Retrieves contact ID's from Database
      * @return Returns list of contact ID's
-     * @throws Exception
+     * @throws Exception Throws Exception
      */
     public static ObservableList<String> getContactIdAndName() throws Exception {
 
